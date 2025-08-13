@@ -1,0 +1,219 @@
+================================================================================
+                    CTI BLOCKCHAIN PLATFORM - TECHNICAL ARCHITECTURE
+                           Developer's System Overview
+================================================================================
+
+🏗️ SYSTEM ARCHITECTURE OVERVIEW
+================================================================================
+
+This is a full-stack decentralized application (dApp) built on Ethereum blockchain
+for cyber threat intelligence sharing. The system follows a three-tier architecture:
+
+1. BLOCKCHAIN LAYER (Backend/Data)
+2. APPLICATION LAYER (Business Logic)  
+3. PRESENTATION LAYER (Frontend/UI)
+
+🔧 COMPONENT BREAKDOWN
+================================================================================
+
+1. SMART CONTRACT LAYER (contracts/CTIRegistry.sol)
+   ├── Role: Core business logic and data storage
+   ├── Technology: Solidity smart contract on Ethereum
+   ├── Functions:
+   │   ├── submitCTI() - Store threat intelligence data
+   │   ├── voteCTI() - Community validation mechanism
+   │   ├── getCTI() - Retrieve threat data
+   │   └── getActiveCTIs() - Paginated data retrieval
+   ├── Data Structures:
+   │   ├── CTI struct - Threat intelligence record
+   │   ├── Voting mappings - User vote tracking
+   │   └── Counter variables - ID management
+   └── Security Features:
+       ├── Access control (no self-voting)
+       ├── Input validation
+       └── Reentrancy protection
+
+2. DEPLOYMENT & TESTING INFRASTRUCTURE
+   ├── scripts/deploy.js
+   │   ├── Automated contract deployment
+   │   ├── Network detection (Sepolia/Mainnet)
+   │   ├── Contract verification
+   │   └── Deployment logging
+   ├── test/CTIRegistry.test.js
+   │   ├── Unit tests (19 test cases)
+   │   ├── Integration testing
+   │   ├── Edge case validation
+   │   └── Gas optimization testing
+   └── hardhat.config.js
+       ├── Network configurations
+       ├── Compiler settings
+       └── Plugin integrations
+
+3. FRONTEND APPLICATION LAYER
+   ├── React.js Framework
+   │   ├── Component-based architecture
+   │   ├── State management with hooks
+   │   └── Responsive design
+   ├── Web3 Integration
+   │   ├── MetaMask wallet connection
+   │   ├── Ethereum transaction handling
+   │   └── Smart contract interaction
+   └── IPFS Integration
+       ├── Decentralized file storage
+       ├── Metadata management
+       └── Content addressing
+
+4. COMPONENT ARCHITECTURE (frontend/src/components/)
+   ├── App.js - Main application controller
+   │   ├── Routing logic
+   │   ├── Global state management
+   │   ├── Wallet connection handling
+   │   └── Tab navigation
+   ├── Header.js - Navigation component
+   │   ├── Wallet status display
+   │   ├── Connection controls
+   │   └── Brand identity
+   ├── WalletConnection.js - Authentication layer
+   │   ├── MetaMask detection
+   │   ├── Network validation
+   │   └── Connection flow
+   ├── CTISubmission.js - Data input interface
+   │   ├── Form validation
+   │   ├── File upload handling
+   │   ├── IPFS integration
+   │   └── Blockchain transaction
+   └── CTIFeed.js - Data display interface
+       ├── Paginated data loading
+       ├── Filtering and sorting
+       ├── Voting interface
+       └── Real-time updates
+
+5. UTILITY LAYER (frontend/src/utils/)
+   ├── web3.js - Blockchain interaction utilities
+   │   ├── Provider management
+   │   ├── Contract instantiation
+   │   ├── Transaction handling
+   │   └── Error management
+   └── ipfs.js - Decentralized storage utilities
+       ├── File upload/download
+       ├── Metadata handling
+       ├── Content validation
+       └── Gateway management
+
+🔄 DATA FLOW ARCHITECTURE
+================================================================================
+
+1. USER SUBMISSION FLOW:
+   User Input → Form Validation → File Upload (IPFS) → Metadata Creation → 
+   Smart Contract Call → Blockchain Transaction → Event Emission → UI Update
+
+2. VOTING FLOW:
+   User Vote → Wallet Signature → Smart Contract Validation → 
+   Vote Recording → Score Calculation → Event Emission → UI Refresh
+
+3. DATA RETRIEVAL FLOW:
+   Component Mount → Contract Query → Data Processing → 
+   IPFS Metadata Fetch → State Update → UI Rendering
+
+🛡️ SECURITY ARCHITECTURE
+================================================================================
+
+1. SMART CONTRACT SECURITY:
+   ├── Input sanitization and validation
+   ├── Access control mechanisms
+   ├── Reentrancy attack prevention
+   ├── Integer overflow protection
+   └── Gas optimization
+
+2. FRONTEND SECURITY:
+   ├── Client-side input validation
+   ├── Secure wallet integration
+   ├── Network verification
+   ├── Error handling and user feedback
+   └── Private key protection
+
+3. DATA SECURITY:
+   ├── Immutable blockchain storage
+   ├── Decentralized IPFS storage
+   ├── Cryptographic hashing
+   └── Transparent validation
+
+📊 SCALABILITY CONSIDERATIONS
+================================================================================
+
+1. BLOCKCHAIN SCALABILITY:
+   ├── Pagination for large datasets
+   ├── Event-based data loading
+   ├── Gas-optimized operations
+   └── Layer 2 compatibility
+
+2. FRONTEND SCALABILITY:
+   ├── Component lazy loading
+   ├── Virtual scrolling for large lists
+   ├── Caching strategies
+   └── Progressive web app features
+
+3. STORAGE SCALABILITY:
+   ├── IPFS distributed storage
+   ├── Content deduplication
+   ├── Metadata optimization
+   └── CDN integration potential
+
+🔧 DEVELOPMENT WORKFLOW
+================================================================================
+
+1. DEVELOPMENT SETUP:
+   npm run setup → Install dependencies → Compile contracts → Run tests
+
+2. LOCAL DEVELOPMENT:
+   npm run node → Start local blockchain → Deploy locally → Test frontend
+
+3. TESTNET DEPLOYMENT:
+   Configure .env → npm run deploy → Verify deployment → Test on Sepolia
+
+4. PRODUCTION DEPLOYMENT:
+   Frontend build → Deploy to hosting → Update contract addresses → Monitor
+
+📈 MONITORING & MAINTENANCE
+================================================================================
+
+1. CONTRACT MONITORING:
+   ├── Event log analysis
+   ├── Gas usage tracking
+   ├── Transaction success rates
+   └── User activity metrics
+
+2. FRONTEND MONITORING:
+   ├── Performance metrics
+   ├── Error tracking
+   ├── User experience analytics
+   └── Wallet connection success
+
+3. SYSTEM HEALTH:
+   ├── IPFS node availability
+   ├── RPC endpoint status
+   ├── Smart contract state
+   └── Frontend accessibility
+
+🚀 DEPLOYMENT ARCHITECTURE
+================================================================================
+
+1. SMART CONTRACT DEPLOYMENT:
+   Local Development → Sepolia Testnet → Mainnet Production
+   
+2. FRONTEND DEPLOYMENT:
+   Local Development → Staging Environment → Production CDN
+
+3. INFRASTRUCTURE:
+   ├── Alchemy RPC endpoints
+   ├── IPFS storage nodes
+   ├── Frontend hosting (Vercel/Netlify)
+   └── Domain and SSL management
+
+================================================================================
+                              END OF DOCUMENT
+================================================================================
+
+This architecture provides a robust, scalable, and secure foundation for 
+decentralized cyber threat intelligence sharing, leveraging the best practices
+of modern blockchain development and web application architecture.
