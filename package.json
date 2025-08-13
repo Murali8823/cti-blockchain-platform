@@ -1,0 +1,28 @@
+{
+  "name": "cti-blockchain-platform",
+  "version": "1.0.0",
+  "description": "Decentralized Cyber Threat Intelligence Sharing Platform",
+  "main": "index.js",
+  "scripts": {
+    "setup": "node setup.js",
+    "compile": "hardhat compile",
+    "deploy": "hardhat run scripts/deploy.js --network sepolia",
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost",
+    "test": "hardhat test",
+    "node": "hardhat node",
+    "frontend": "cd frontend && npm start",
+    "build": "hardhat compile && cd frontend && npm run build",
+    "clean": "hardhat clean && rm -rf frontend/build"
+  },
+  "keywords": ["blockchain", "ethereum", "cybersecurity", "threat-intelligence", "ipfs"],
+  "author": "CTI Platform Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "ethers": "^6.8.0"
+  }
+}
