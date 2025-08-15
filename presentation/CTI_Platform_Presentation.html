@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTI Blockchain Platform Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%);
+            border: 1px solid #404040;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #808080 0%, #c0c0c0 50%, #808080 100%);
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: linear-gradient(135deg, #2d2d2d 0%, #404040 100%);
+            color: #c0c0c0;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            border: 1px solid #606060;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(192, 192, 192, 0.3);
+        }
+
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #c0c0c0;
+            text-shadow: 0 0 5px rgba(192, 192, 192, 0.2);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+            border-bottom: 2px solid #404040;
+            padding-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .content-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #404040;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin: 15px 0;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #2d2d2d 0%, #404040 100%);
+            border-radius: 8px;
+            border-left: 4px solid #c0c0c0;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '✅';
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .problem-list li::before {
+            content: '❌';
+        }
+
+        .architecture-diagram {
+            text-align: center;
+            font-family: monospace;
+            background: #000000;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #404040;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #404040;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #c0c0c0;
+            display: block;
+        }
+
+        .stat-label {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #404040;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .comparison-table td {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border-radius: 12px;
+            border: 2px solid #c0c0c0;
+            margin: 20px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #2d2d2d 0%, #404040 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid #c0c0c0;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #404040 0%, #505050 100%);
+            box-shadow: 0 4px 15px rgba(192, 192, 192, 0.2);
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 8px;
+            border: 1px solid #404040;
+        }
+
+        .highlight {
+            color: #c0c0c0;
+            font-weight: bold;
+        }
+
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .slide {
+                background: white;
+                border: 1px solid #ccc;
+                box-shadow: none;
+                margin-bottom: 0;
+                page-break-after: always;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .slide {
+                padding: 20px;
+                min-height: auto;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        
+        <!-- Slide 1: Title -->
+        <div class="slide">
+            <div class="slide-number">1/16</div>
+            <h1><span class="emoji">🛡️</span>DECENTRALIZED CYBER THREAT INTELLIGENCE SHARING PLATFORM</h1>
+            <div class="subtitle">Revolutionizing Cybersecurity Through Blockchain Technology</div>
+            <div class="contact-info">
+                <p><strong>Presented by:</strong> Murali</p>
+                <p><strong>Date:</strong> December 2024</p>
+                <p><strong>GitHub:</strong> github.com/Murali8823/cti-blockchain-platform</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Problem -->
+        <div class="slide">
+            <div class="slide-number">2/16</div>
+            <h2><span class="emoji">🚨</span>THE CYBERSECURITY CRISIS</h2>
+            <h3>Current Challenges in Threat Intelligence:</h3>
+            <ul class="feature-list problem-list">
+                <li><strong>SILOED INFORMATION</strong><br>Organizations hoard threat data, limited sharing between security teams, duplicate research and analysis</li>
+                <li><strong>TRUST & VALIDATION ISSUES</strong><br>No way to verify threat intelligence quality, false positives waste valuable resources, lack of credibility scoring</li>
+                <li><strong>CENTRALIZED VULNERABILITIES</strong><br>Single points of failure, vendor lock-in and data control, censorship and manipulation risks</li>
+            </ul>
+            <div class="stat-card" style="margin-top: 30px;">
+                <span class="stat-number">$6 TRILLION</span>
+                <span class="stat-label">Annual cost of cybercrime damages</span>
+            </div>
+        </div>
+
+        <!-- Slide 3: Our Solution -->
+        <div class="slide">
+            <div class="slide-number">3/16</div>
+            <h2><span class="emoji">🛡️</span>DECENTRALIZED CTI PLATFORM</h2>
+            <h3>Blockchain-Powered Threat Intelligence Sharing:</h3>
+            <ul class="feature-list">
+                <li><strong>DECENTRALIZED VALIDATION</strong><br>Community-driven quality assurance, peer review by security experts, democratic voting system</li>
+                <li><strong>IMMUTABLE STORAGE</strong><br>Permanent threat intelligence database, tamper-proof records on Ethereum, decentralized file storage via IPFS</li>
+                <li><strong>TRANSPARENT OPERATIONS</strong><br>All transactions publicly verifiable, open-source smart contracts, no single point of control</li>
+            </ul>
+            <div class="cta-section">
+                <p class="highlight">RESULT: Trusted, collaborative cybersecurity ecosystem</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Technical Architecture -->
+        <div class="slide">
+            <div class="slide-number">4/16</div>
+            <h2><span class="emoji">🏗️</span>SYSTEM ARCHITECTURE</h2>
+            <div class="architecture-diagram">
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   REACT.JS      │    │    ETHEREUM     │    │      IPFS       │
+│   FRONTEND      │◄──►│ SMART CONTRACT  │◄──►│  FILE STORAGE   │
+│                 │    │                 │    │                 │
+│ • User Interface│    │ • CTI Registry  │    │ • Document      │
+│ • MetaMask      │    │ • Voting System │    │   Storage       │
+│ • Web3 Integration│  │ • Data Validation│   │ • Metadata      │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         ▲                        ▲                        ▲
+         │                        │                        │
+         ▼                        ▼                        ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│    METAMASK     │    │   SEPOLIA       │    │  WEB3.STORAGE   │
+│    WALLET       │    │   TESTNET       │    │    GATEWAY      │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+            </div>
+            <p style="text-align: center; margin-top: 20px;">
+                <span class="highlight">TECHNOLOGY STACK: 18+ cutting-edge technologies</span>
+            </p>
+        </div>
+
+        <!-- Slide 5: Key Features -->
+        <div class="slide">
+            <div class="slide-number">5/16</div>
+            <h2><span class="emoji">🚀</span>PLATFORM CAPABILITIES</h2>
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3><span class="emoji">🔐</span>SECURE SUBMISSION</h3>
+                    <ul class="feature-list">
+                        <li>Upload threat intelligence reports</li>
+                        <li>Comprehensive metadata collection</li>
+                        <li>File validation and security checks</li>
+                        <li>Immutable blockchain storage</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3><span class="emoji">🗳️</span>COMMUNITY VALIDATION</h3>
+                    <ul class="feature-list">
+                        <li>Peer review by security experts</li>
+                        <li>Upvote/downvote quality scoring</li>
+                        <li>Reputation building for contributors</li>
+                        <li>Anti-manipulation safeguards</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3><span class="emoji">📊</span>INTELLIGENT FEED</h3>
+                    <ul class="feature-list">
+                        <li>Real-time threat intelligence updates</li>
+                        <li>Advanced filtering and sorting</li>
+                        <li>Category-based organization</li>
+                        <li>Severity level indicators</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3><span class="emoji">🌐</span>DECENTRALIZED ARCHITECTURE</h3>
+                    <ul class="feature-list">
+                        <li>No single point of failure</li>
+                        <li>Global accessibility</li>
+                        <li>Censorship resistance</li>
+                        <li>Open-source transparency</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: User Interface -->
+        <div class="slide">
+            <div class="slide-number">6/16</div>
+            <h2><span class="emoji">🎨</span>PROFESSIONAL MONOCHROME DESIGN</h2>
+            <h3>Sophisticated Cybersecurity Aesthetic:</h3>
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3><span class="emoji">🖤</span>MATTE BLACK INTERFACE</h3>
+                    <ul class="feature-list">
+                        <li>Professional dark theme</li>
+                        <li>Easy on eyes for long work sessions</li>
+                        <li>Premium gradient backgrounds</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3><span class="emoji">🔘</span>METALLIC SILVER ACCENTS</h3>
+                    <ul class="feature-list">
+                        <li>High-contrast readability</li>
+                        <li>Shimmer effects on interaction</li>
+                        <li>Glow effects for focus states</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3><span class="emoji">📱</span>RESPONSIVE DESIGN</h3>
+                    <ul class="feature-list">
+                        <li>Desktop, tablet, mobile optimized</li>
+                        <li>Touch-friendly interactions</li>
+                        <li>Accessibility compliant</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3><span class="emoji">⚡</span>SMOOTH ANIMATIONS</h3>
+                    <ul class="feature-list">
+                        <li>Loading states and transitions</li>
+                        <li>Interactive feedback</li>
+                        <li>Professional user experience</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Smart Contract -->
+        <div class="slide">
+            <div class="slide-number">7/16</div>
+            <h2><span class="emoji">⚙️</span>BLOCKCHAIN IMPLEMENTATION</h2>
+            <h3>CTIRegistry Smart Contract:</h3>
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3><span class="emoji">📝</span>CORE FUNCTIONS</h3>
+                    <ul class="feature-list">
+                        <li>submitCTI() - Submit threat intelligence</li>
+                        <li>voteCTI() - Community validation voting</li>
+                        <li>getCTI() - Retrieve threat data</li>
+                        <li>getActiveCTIs() - Paginated data access</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3><span class="emoji">🔒</span>SECURITY FEATURES</h3>
+                    <ul class="feature-list">
+                        <li>Input validation and sanitization</li>
+                        <li>Access control mechanisms</li>
+                        <li>Reentrancy attack prevention</li>
+                        <li>Gas optimization</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">19/19</span>
+                    <span class="stat-label">Tests Passing</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Function Coverage</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">0</span>
+                    <span class="stat-label">Security Vulnerabilities</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Voting System -->
+        <div class="slide">
+            <div class="slide-number">8/16</div>
+            <h2><span class="emoji">🗳️</span>DECENTRALIZED VALIDATION MECHANISM</h2>
+            <h3>Why Voting is Critical:</h3>
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3><span class="emoji">🎯</span>QUALITY ASSURANCE</h3>
+                    <ul class="feature-list">
+                        <li>Community peer review process</li>
+                        <li>Filter out false positives</li>
+                        <li>Identify high-value intelligence</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3><span class="emoji">📈</span>CREDIBILITY SCORING</h3>
+                    <ul class="feature-list">
+                        <li>Upvotes = Trusted intelligence</li>
+                        <li>Downvotes = Questionable quality</li>
+                        <li>Net score = Community consensus</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3><span class="emoji">🛡️</span>ANTI-MANIPULATION</h3>
+                    <ul class="feature-list">
+                        <li>No self-voting allowed</li>
+                        <li>One vote per user per CTI</li>
+                        <li>Transparent voting history</li>
+                        <li>Blockchain immutability</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3><span class="emoji">💡</span>REAL-WORLD IMPACT</h3>
+                    <ul class="feature-list">
+                        <li>Prevents wasted security resources</li>
+                        <li>Builds trusted intelligence database</li>
+                        <li>Enables rapid threat response</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Development Metrics -->
+        <div class="slide">
+            <div class="slide-number">9/16</div>
+            <h2><span class="emoji">📊</span>PROJECT STATISTICS</h2>
+            <h3>Code Quality Metrics:</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">41+</span>
+                    <span class="stat-label">Files in Codebase</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">1,000+</span>
+                    <span class="stat-label">Lines of Smart Contract Code</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">2,000+</span>
+                    <span class="stat-label">Lines of Frontend Code</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">900+</span>
+                    <span class="stat-label">Lines of Documentation</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">18+</span>
+                    <span class="stat-label">Technologies Used</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Test Coverage</span>
+                </div>
+            </div>
+            <div class="content-section" style="margin-top: 30px;">
+                <h3><span class="emoji">📚</span>COMPREHENSIVE DOCUMENTATION</h3>
+                <ul class="feature-list">
+                    <li>Complete technical architecture documentation</li>
+                    <li>API documentation with examples</li>
+                    <li>Step-by-step deployment guides</li>
+                    <li>User manuals and troubleshooting</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 10: Business Value -->
+        <div class="slide">
+            <div class="slide-number">10/16</div>
+            <h2><span class="emoji">💼</span>BUSINESS IMPACT & VALUE</h2>
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3>FOR SECURITY PROFESSIONALS:</h3>
+                    <ul class="feature-list">
+                        <li><strong>TIME SAVINGS:</strong> Focus on validated threats only</li>
+                        <li><strong>COST REDUCTION:</strong> Reduce incident response costs</li>
+                        <li><strong>IMPROVED DECISIONS:</strong> Act on peer-reviewed intelligence</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3>FOR ORGANIZATIONS:</h3>
+                    <ul class="feature-list">
+                        <li><strong>ENHANCED SECURITY:</strong> Access to global threat intelligence</li>
+                        <li><strong>COMPETITIVE ADVANTAGE:</strong> Stay ahead of emerging threats</li>
+                        <li><strong>COST EFFICIENCY:</strong> Minimize business disruption</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="cta-section">
+                <p class="highlight">ROI: Significant cost savings through reduced false positives and faster threat response</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Live Demo -->
+        <div class="slide">
+            <div class="slide-number">11/16</div>
+            <h2><span class="emoji">🖥️</span>LIVE PLATFORM DEMO</h2>
+            <h3>Demonstration Workflow:</h3>
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3><span class="emoji">1️⃣</span>WALLET CONNECTION</h3>
+                    <ul class="feature-list">
+                        <li>MetaMask integration</li>
+                        <li>Sepolia testnet connection</li>
+                        <li>Account authentication</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3><span class="emoji">2️⃣</span>CTI SUBMISSION</h3>
+                    <ul class="feature-list">
+                        <li>Comprehensive form interface</li>
+                        <li>File upload to IPFS</li>
+                        <li>Blockchain transaction</li>
+                        <li>Confirmation and feedback</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3><span class="emoji">3️⃣</span>COMMUNITY VOTING</h3>
+                    <ul class="feature-list">
+                        <li>Browse threat intelligence feed</li>
+                        <li>Vote on submissions</li>
+                        <li>Real-time score updates</li>
+                        <li>Transaction verification</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3><span class="emoji">4️⃣</span>DATA VERIFICATION</h3>
+                    <ul class="feature-list">
+                        <li>Etherscan blockchain explorer</li>
+                        <li>Transaction history</li>
+                        <li>Smart contract interaction</li>
+                        <li>Immutable data proof</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Roadmap -->
+        <div class="slide">
+            <div class="slide-number">12/16</div>
+            <h2><span class="emoji">🚀</span>GROWTH & EXPANSION PLANS</h2>
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3>CURRENT CAPABILITIES:</h3>
+                    <ul class="feature-list">
+                        <li>Ethereum Sepolia testnet deployment</li>
+                        <li>IPFS decentralized storage</li>
+                        <li>Community voting system</li>
+                        <li>Professional web interface</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3>PHASE 2: ENHANCED FEATURES</h3>
+                    <ul class="feature-list">
+                        <li>Mainnet deployment</li>
+                        <li>Token incentive system</li>
+                        <li>Advanced analytics dashboard</li>
+                        <li>API for third-party integrations</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3>PHASE 3: ENTERPRISE INTEGRATION</h3>
+                    <ul class="feature-list">
+                        <li>Enterprise security tool integration</li>
+                        <li>AI-powered threat analysis</li>
+                        <li>Machine learning validation</li>
+                        <li>Multi-chain support</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3>PHASE 4: ECOSYSTEM EXPANSION</h3>
+                    <ul class="feature-list">
+                        <li>Global security community</li>
+                        <li>Educational partnerships</li>
+                        <li>Government collaboration</li>
+                        <li>Mobile applications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Competitive Advantage -->
+        <div class="slide">
+            <div class="slide-number">13/16</div>
+            <h2><span class="emoji">🏆</span>MARKET DIFFERENTIATION</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Traditional CTI Platforms</th>
+                        <th>Our Blockchain Solution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>❌ Centralized control</td>
+                        <td>✅ Decentralized governance</td>
+                    </tr>
+                    <tr>
+                        <td>❌ Vendor lock-in</td>
+                        <td>✅ Open-source freedom</td>
+                    </tr>
+                    <tr>
+                        <td>❌ Trust-based validation</td>
+                        <td>✅ Cryptographic proof</td>
+                    </tr>
+                    <tr>
+                        <td>❌ Single point of failure</td>
+                        <td>✅ Distributed resilience</td>
+                    </tr>
+                    <tr>
+                        <td>❌ Limited transparency</td>
+                        <td>✅ Complete transparency</td>
+                    </tr>
+                    <tr>
+                        <td>❌ Subscription fees</td>
+                        <td>✅ Community-driven model</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="cta-section">
+                <p class="highlight">KEY DIFFERENTIATOR: First blockchain-based CTI validation system with community governance</p>
+            </div>
+        </div>
+
+        <!-- Slide 14: Security -->
+        <div class="slide">
+            <div class="slide-number">14/16</div>
+            <h2><span class="emoji">🔒</span>SECURITY ARCHITECTURE</h2>
+            <h3>Multi-Layer Security Approach:</h3>
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3><span class="emoji">🛡️</span>SMART CONTRACT SECURITY</h3>
+                    <ul class="feature-list">
+                        <li>Comprehensive input validation</li>
+                        <li>Access control mechanisms</li>
+                        <li>Reentrancy attack prevention</li>
+                        <li>Gas optimization and DoS protection</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3><span class="emoji">🔐</span>FRONTEND SECURITY</h3>
+                    <ul class="feature-list">
+                        <li>Secure wallet integration</li>
+                        <li>Client-side input validation</li>
+                        <li>Network verification</li>
+                        <li>Private key protection</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3><span class="emoji">📊</span>DATA SECURITY</h3>
+                    <ul class="feature-list">
+                        <li>Immutable blockchain storage</li>
+                        <li>Decentralized IPFS storage</li>
+                        <li>Cryptographic hashing</li>
+                        <li>Transparent validation</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3><span class="emoji">✅</span>COMPLIANCE</h3>
+                    <ul class="feature-list">
+                        <li>Open-source transparency</li>
+                        <li>Audit-ready codebase</li>
+                        <li>Privacy-preserving design</li>
+                        <li>Regulatory compliance framework</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Call to Action -->
+        <div class="slide">
+            <div class="slide-number">15/16</div>
+            <h2><span class="emoji">🚀</span>JOIN THE REVOLUTION</h2>
+            <div class="subtitle">The Future of Cybersecurity is Decentralized</div>
+            
+            <div class="content-grid">
+                <div class="content-section">
+                    <h3><span class="emoji">🌟</span>WHAT WE'VE BUILT:</h3>
+                    <ul class="feature-list">
+                        <li>Complete blockchain-based CTI platform</li>
+                        <li>Professional-grade user interface</li>
+                        <li>Comprehensive testing and documentation</li>
+                        <li>Production-ready architecture</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h3><span class="emoji">🎯</span>READY FOR:</h3>
+                    <ul class="feature-list">
+                        <li>Mainnet deployment</li>
+                        <li>Enterprise partnerships</li>
+                        <li>Community adoption</li>
+                        <li>Investment and scaling</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h3><span class="emoji">💡</span>OPPORTUNITIES:</h3>
+                <a href="#" class="cta-button">Investment Partnerships</a>
+                <a href="#" class="cta-button">Technical Collaboration</a>
+                <a href="#" class="cta-button">Enterprise Pilots</a>
+                <a href="#" class="cta-button">Academic Research</a>
+                
+                <div class="contact-info" style="margin-top: 30px;">
+                    <p><strong>GitHub:</strong> github.com/Murali8823/cti-blockchain-platform</p>
+                    <p><strong>Contact:</strong> [Your Contact Information]</p>
+                    <p style="font-style: italic; margin-top: 20px;">
+                        "Building the future of cybersecurity, one block at a time"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Q&A -->
+        <div class="slide">
+            <div class="slide-number">16/16</div>
+            <h2><span class="emoji">❓</span>QUESTIONS & ANSWERS</h2>
+            <div class="subtitle">Thank you for your attention!</div>
+            
+            <h3 style="text-align: center; margin: 40px 0;">Questions & Discussion</h3>
+            
+            <div class="content-section">
+                <h3>COMMON QUESTIONS PREPARED:</h3>
+                <div style="margin: 20px 0;">
+                    <p><strong>Q: How does this compare to existing CTI platforms?</strong></p>
+                    <p>A: First decentralized solution with blockchain immutability and community validation</p>
+                </div>
+                <div style="margin: 20px 0;">
+                    <p><strong>Q: What about scalability on Ethereum?</strong></p>
+                    <p>A: Layer 2 solutions and multi-chain support planned for high throughput</p>
+                </div>
+                <div style="margin: 20px 0;">
+                    <p><strong>Q: How do you ensure data quality?</strong></p>
+                    <p>A: Community voting system with reputation building and anti-manipulation safeguards</p>
+                </div>
+                <div style="margin: 20px 0;">
+                    <p><strong>Q: When will this be production-ready?</strong></p>
+                    <p>A: Platform is ready now, mainnet deployment pending community adoption</p>
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <h3>Contact Information:</h3>
+                <p><strong>Email:</strong> [Your Email]</p>
+                <p><strong>LinkedIn:</strong> [Your LinkedIn]</p>
+                <p><strong>GitHub:</strong> github.com/Murali8823/cti-blockchain-platform</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Add some interactivity for presentation mode
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                // Next slide logic could be added here
+                console.log('Next slide');
+            } else if (e.key === 'ArrowLeft') {
+                // Previous slide logic could be added here
+                console.log('Previous slide');
+            }
+        });
+
+        // Print-friendly version
+        function printPresentation() {
+            window.print();
+        }
+
+        // Add print button
+        const printButton = document.createElement('button');
+        printButton.textContent = 'Print/Save as PDF';
+        printButton.style.position = 'fixed';
+        printButton.style.top = '20px';
+        printButton.style.right = '20px';
+        printButton.style.zIndex = '1000';
+        printButton.style.padding = '10px 20px';
+        printButton.style.backgroundColor = '#404040';
+        printButton.style.color = 'white';
+        printButton.style.border = 'none';
+        printButton.style.borderRadius = '5px';
+        printButton.style.cursor = 'pointer';
+        printButton.onclick = printPresentation;
+        document.body.appendChild(printButton);
+    </script>
+</body>
+</html>

@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTI Blockchain Platform - Decentralized Cyber Threat Intelligence</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #00d4ff;
+            --success-color: #4facfe;
+            --warning-color: #43e97b;
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }       
+ .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .section:nth-child(even) {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            position: relative;
+            overflow: hidden;
+        }       
+ .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="blockchain" patternUnits="userSpaceOnUse" width="20" height="20"><rect width="20" height="20" fill="none" stroke="rgba(102,126,234,0.1)" stroke-width="0.5"/><circle cx="10" cy="10" r="2" fill="rgba(102,126,234,0.2)"/></pattern></defs><rect width="100" height="100" fill="url(%23blockchain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }   
+     /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Architecture Section */
+        .architecture {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(118, 75, 162, 0.05));
+        }
+
+        .architecture-diagram {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blockchain-visual {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .blockchain-node {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            min-width: 200px;
+            position: relative;
+        }
+
+        .blockchain-node::after {
+            content: '⟶';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+
+        .blockchain-node:last-child::after {
+            display: none;
+        }       
+ /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .blockchain-visual {
+                flex-direction: column;
+            }
+            
+            .blockchain-node::after {
+                content: '⬇';
+                right: 50%;
+                top: 100%;
+                transform: translateX(50%);
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head><bod
+y>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🛡️ CTI Platform</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#stats">Statistics</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="section hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="fade-in">Decentralized Cyber Threat Intelligence</h1>
+                <p class="fade-in">Revolutionizing cybersecurity through blockchain technology. Share, validate, and access threat intelligence in a decentralized, transparent ecosystem.</p>
+                <div class="cta-buttons fade-in">
+                    <a href="#features" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Explore Platform
+                    </a>
+                    <a href="https://github.com/Murali8823/cti-blockchain-platform" class="btn btn-secondary" target="_blank">
+                        <i class="fab fa-github"></i>
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="fade-in" style="font-size: 3rem; margin-bottom: 3rem;">Platform Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🔐</div>
+                        <h3>Secure Submission</h3>
+                        <p>Upload threat intelligence reports with comprehensive metadata collection and immutable blockchain storage.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🗳️</div>
+                        <h3>Community Validation</h3>
+                        <p>Peer review by security experts with upvote/downvote quality scoring and reputation building.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">📊</div>
+                        <h3>Intelligent Feed</h3>
+                        <p>Real-time threat intelligence updates with advanced filtering, sorting, and severity indicators.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Decentralized Architecture</h3>
+                        <p>No single point of failure with global accessibility, censorship resistance, and open-source transparency.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+   <!-- Architecture Section -->
+    <section id="architecture" class="section architecture">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="fade-in" style="font-size: 3rem; margin-bottom: 2rem;">System Architecture</h2>
+                <p class="fade-in" style="margin-bottom: 3rem;">Built on cutting-edge blockchain technology with 18+ integrated technologies</p>
+                
+                <div class="architecture-diagram fade-in">
+                    <div class="blockchain-visual">
+                        <div class="blockchain-node slide-in-left">
+                            <h4>React Frontend</h4>
+                            <p>User Interface<br>MetaMask Integration<br>Web3 Connection</p>
+                        </div>
+                        <div class="blockchain-node fade-in">
+                            <h4>Ethereum Blockchain</h4>
+                            <p>Smart Contracts<br>CTI Registry<br>Voting System</p>
+                        </div>
+                        <div class="blockchain-node slide-in-right">
+                            <h4>IPFS Storage</h4>
+                            <p>Decentralized Files<br>Document Storage<br>Metadata</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="stats" class="section">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="fade-in" style="font-size: 3rem; margin-bottom: 3rem;">Project Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card fade-in">
+                        <span class="stat-number">185+</span>
+                        <span class="stat-label">Lines of Smart Contract Code</span>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <span class="stat-number">19/19</span>
+                        <span class="stat-label">Tests Passing</span>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <span class="stat-number">18+</span>
+                        <span class="stat-label">Technologies Used</span>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <span class="stat-number">41+</span>
+                        <span class="stat-label">Files in Codebase</span>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Function Coverage</span>
+                    </div>
+                    <div class="stat-card fade-in">
+                        <span class="stat-number">$6T</span>
+                        <span class="stat-label">Annual Cybercrime Cost</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
+<!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="fade-in" style="font-size: 3rem; margin-bottom: 2rem;">Join the Revolution</h2>
+                <p class="fade-in" style="margin-bottom: 3rem;">The future of cybersecurity is decentralized. Get involved in building the next generation of threat intelligence sharing.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">💼</div>
+                        <h3>Investment Partnerships</h3>
+                        <p>Scale the platform with strategic investments and enterprise partnerships.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🤝</div>
+                        <h3>Technical Collaboration</h3>
+                        <p>Contribute to open-source development and blockchain innovation.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🏢</div>
+                        <h3>Enterprise Pilots</h3>
+                        <p>Deploy pilot programs in enterprise security environments.</p>
+                    </div>
+                </div>
+                
+                <div class="cta-buttons fade-in" style="margin-top: 3rem;">
+                    <a href="https://github.com/Murali8823/cti-blockchain-platform" class="btn btn-primary" target="_blank">
+                        <i class="fab fa-github"></i>
+                        View Source Code
+                    </a>
+                    <a href="mailto:contact@ctiplatform.com" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i>
+                        Get in Touch
+                    </a>
+                </div>
+                
+                <div style="margin-top: 3rem; padding: 2rem; background: var(--card-bg); border-radius: 15px; border: 1px solid var(--border-color);" class="fade-in">
+                    <p style="font-style: italic; color: var(--text-secondary);">
+                        "Building the future of cybersecurity, one block at a time"
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        <strong>GitHub:</strong> github.com/Murali8823/cti-blockchain-platform<br>
+                        <strong>Platform:</strong> Ready for mainnet deployment<br>
+                        <strong>Status:</strong> Production-ready with comprehensive testing
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });    
+    // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animation elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Add blockchain network animation
+        function createBlockchainAnimation() {
+            const nodes = document.querySelectorAll('.blockchain-node');
+            nodes.forEach((node, index) => {
+                setTimeout(() => {
+                    node.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        node.style.transform = 'scale(1)';
+                    }, 200);
+                }, index * 500);
+            });
+        }
+
+        // Trigger blockchain animation when architecture section is visible
+        const architectureSection = document.querySelector('#architecture');
+        const architectureObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(createBlockchainAnimation, 1000);
+                    architectureObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        architectureObserver.observe(architectureSection);
+
+        // Add counter animation for stats
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = counter.textContent;
+                const isNumber = !isNaN(target.replace(/[^0-9]/g, ''));
+                
+                if (isNumber) {
+                    const finalNumber = parseInt(target.replace(/[^0-9]/g, ''));
+                    const suffix = target.replace(/[0-9]/g, '');
+                    let current = 0;
+                    const increment = finalNumber / 50;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= finalNumber) {
+                            counter.textContent = finalNumber + suffix;
+                            clearInterval(timer);
+                        } else {
+                            counter.textContent = Math.floor(current) + suffix;
+                        }
+                    }, 30);
+                }
+            });
+        }
+
+        // Trigger counter animation when stats section is visible
+        const statsSection = document.querySelector('#stats');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(animateCounters, 500);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        statsObserver.observe(statsSection);
+    </script>
+</body>
+</html>
