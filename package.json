@@ -14,7 +14,13 @@
     "build": "hardhat compile && cd frontend && npm run build",
     "clean": "hardhat clean && rm -rf frontend/build"
   },
-  "keywords": ["blockchain", "ethereum", "cybersecurity", "threat-intelligence", "ipfs"],
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "cybersecurity",
+    "threat-intelligence",
+    "ipfs"
+  ],
   "author": "CTI Platform Team",
   "license": "MIT",
   "devDependencies": {
